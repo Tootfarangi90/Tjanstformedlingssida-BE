@@ -1,0 +1,19 @@
+{
+  "name": "tjanstformedlingssida-be",
+  "version": "1.0.0",
+  "description": "Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tootfarangi90/Tjanstformedlingssida-BE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE/issues"
+  },
+  "homepage": "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE#readme"
+}
