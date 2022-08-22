@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
   }
 }
