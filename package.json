@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE/issues"
   },
-  "homepage": "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE#readme"
+  "homepage": "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
