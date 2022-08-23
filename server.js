@@ -1,8 +1,5 @@
 const express = require('express');
-<<<<<<< HEAD
 
-=======
->>>>>>> server
 const server = express();
 server.use(express.json())
 
