@@ -1,16 +1,14 @@
 const express = require('express');
+const routes = require ('./routes');
 
 const server = express();
+const port = 5000;
+
+
+
+
+
+
 server.use(express.json())
-
-server.get("/", (req, res) => {
-    headers={"cache-control": "no-cache"}
-    body={"status": "its working"}
-    res.status(200).json(body)
-})
-
-
-server.listen(8080, () => {
-    console.log('Port 8080 ready')
-})
-
+server.use('/', routes);
+server.listen(port, () => console.log(`Server started on port ${port}`))
