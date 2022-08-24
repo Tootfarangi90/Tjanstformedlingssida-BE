@@ -1,16 +1,18 @@
-const express = require('express');
+const express = require('express')
+const routes = require('./routes/user.js')
 
-const server = express();
-server.use(express.json())
+const app = express()
+app.use(express.json())
+app.use('/user', routes)
 
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
     headers={"cache-control": "no-cache"}
-    body={"status": "its working"}
+    body={"status": "available"}
     res.status(200).json(body)
 })
 
 
-server.listen(8080, () => {
+app.listen(8080, () => {
     console.log('Port 8080 ready')
 })
 
