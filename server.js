@@ -1,15 +1,17 @@
 const express = require('express');
 const routes = require ('./routes');
+var favicon = require('serve-favicon')
+var path = require('path')
 
-const server = express();
-const port = 5000;
-server.use(express.static('public'))
+const app = express();
+const port = process.env.PORT || 5000;
+app.use(express.static('public'))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 
 
 
 
-
-server.use(express.json())
-server.use('/', routes);
-server.listen(port, () => console.log(`Server started on port ${port}`))
+app.use(express.json())
+app.use('/', routes);
+app.listen(port, () => console.log(`Server started on port ${port}`))
