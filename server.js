@@ -6,7 +6,7 @@ const cors = require('cors')
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use('/user', routes)
+app.use('/', routes)
 
 app.get("/", (req, res) => {
     headers={"cache-control": "no-cache"}
@@ -18,3 +18,4 @@ app.get("/", (req, res) => {
 app.listen(8080, () => {
     console.log('Port 8080 ready')
 })
+

@@ -1,21 +1,23 @@
 const express = require("express")
 const router = express.Router({})
 
-let users = {}
+let users = []
 
 router.post('/register', (req, res, next) => {
 
-const id = req.body.email
-const today = new Date()
+    const date = new Date()
 
-    users[id] = {
-        id: req.body.email,
+    newUser = {
         email: req.body.email,
         password: req.body.password,
-        date: today
+        userCreated: date
     }
-
+    users.push(newUser)
     res.status(200).send(users)
+})
+
+router.get('/getusers', (req, res) => {
+    res.status(200).json(users)
 })
 
 module.exports = router;
