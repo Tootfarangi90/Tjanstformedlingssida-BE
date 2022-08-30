@@ -1,5 +1,17 @@
 # Tjänstförmedling backend
 
+## Scheduele 
+
+| # Our   |      # Weekly      |  # Plans |
+|----------|-------------|------|
+| Dag |  Tid | Plats |
+| Måndag |    10.00   |   Stan |
+| Tisdag |    09.00   |   Skolan |
+| Onsdag |    10.00   |   Online/discord |
+| Torsdag |   09.00   |   Skolan |
+| Fredag |    13.00   |   Online |
+
+
 ## Technologies
 
 ### **Backend technologies**
@@ -35,7 +47,6 @@ How to open up the project at Visual studio code:
 code .
 ```
 
-
 ## Onboarding
 
 Nodemon is saved under dependecies, so you start the project like this:
@@ -47,7 +58,7 @@ npm run dev
 We have a database where users store their profiles. We use mongoose.
 
 
-## Sequence Diagram
+### Sequence diagram for JWT
 
 ```mermaid
 sequenceDiagram
