@@ -1,5 +1,14 @@
 # Tjänstförmedling backend
 
+| # Our   |      # Weekly      |  # Plans |
+|----------|-------------|------|
+| Dag |  Tid | Plats |
+| Måndag |    10.00   |   Stan |
+| Tisdag |    09.00   |   Skolan |
+| Onsdag |    10.00   |   Online/discord |
+| Torsdag |   09.00   |   Skolan |
+| Fredag |    13.00   |   Online |
+
 ## Table of content
 1. [Technologies](#technologies)
     1. [Backend technologies](#backend-technologies)
