@@ -1,20 +1,12 @@
 # Tjänstförmedling backend
 
-## Table of content
-1. [Technologies](#technologies)
-    1. [Backend technologies](#backend-technologies)
-    2. [Test technologies](#test-technologies)
-2. [TTFHW](#ttfhw)
-3. [Omboarding](#onboarding)
-4. [Sequence diagram](#sequence-diagram)
-
 ## Technologies
 
 ### **Backend technologies**
 + Nodejs
 + MongoDB
 
-## **Test technologies**
+### **Test technologies**
 + Jest
 
 ## TTFHW
@@ -55,7 +47,7 @@ npm run dev
 We have a database where users store their profiles. We use mongoose.
 
 
-### Sequence Diagram
+## Sequence Diagram
 
 ```mermaid
 sequenceDiagram
