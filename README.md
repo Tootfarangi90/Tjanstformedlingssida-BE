@@ -1,7 +1,29 @@
-# Tjansformedlingssida-BE
-Backend
+# Tjänstförmedling backend
 
-<h2>Sequence Diagram</h2>
+## Table of content
+
+### Technologies
+
+Nodejs
+MongoDB
+Trello
+
+### TTRHP
+
+```javascript
+cd ~
+cd workspace
+cd tjänstförmedling
+git clone "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE.git"
+git pull
+npm i
+touch .env
+code .
+```
+
+### Onboarding
+
+### Sequence Diagram
 
 ```mermaid
 sequenceDiagram
