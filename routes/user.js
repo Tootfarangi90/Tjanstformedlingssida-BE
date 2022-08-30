@@ -1,20 +1,37 @@
 const express = require("express")
 const router = express.Router({})
+const userSchema = require('../mongooseSchema/userSchema')
 
-let users = []
+router.post('/register', async (req, res, next) => {
 
-router.post('/register', (req, res, next) => {
 
-    const date = new Date()
-
-    newUser = {
+    const newUser = new userSchema({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
-        userCreated: date
-    }
-    users.push(newUser)
-    res.status(200).send(users)
+        birthday: req.body.birthday,
+        occupation: req.body.occupation,
+    })
+
+    const findUser = await userSchema.findOne({email: req.body.email})
+        
+        if (findUser) {
+            res.json('Email already exists')
+
+        } else {
+            res.json('Succeeded')
+            newUser.save()
+            console.log(req.body)
+        }
+
 })
+
+/*
+router.get('/getusers', (req,res) => {
+    res.json(req.body)
+})
+*/
 
 router.post('/login', async (req,res, next) => {
 try {
@@ -52,8 +69,5 @@ try {
 
 })
 
-router.get('/getusers', (req, res) => {
-    res.status(200).json(users)
-})
 
 module.exports = router;

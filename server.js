@@ -6,7 +6,7 @@ require('dotenv').config()
 const routes = require('./routes/user.js')
 
 
-mongoose.connect('process.env.DATABASE_URL', () => {
+mongoose.connect(process.env.DATABASE_URL, () => {
     console.log("Database is connected")
 })
 
