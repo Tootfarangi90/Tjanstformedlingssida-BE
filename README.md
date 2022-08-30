@@ -8,17 +8,16 @@
 3. [Omboarding](#onboarding)
 4. [Sequence diagram](#sequence-diagram)
 
-### Technologies
+## Technologies
 
-#### **Backend technologies**
+### **Backend technologies**
 + Nodejs
 + MongoDB
 
-#### **Test technologies**
+## **Test technologies**
 + Jest
 
-
-### TTFHW
+## TTFHW
 
 To access the repository, make sure you are a collaborator, so that you can clone the repo in your workspace folder with this command:
 
@@ -45,7 +44,7 @@ code .
 ```
 
 
-### Onboarding
+## Onboarding
 
 Nodemon is saved under dependecies, so you start the project like this:
 
