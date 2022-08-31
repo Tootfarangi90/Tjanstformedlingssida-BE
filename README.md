@@ -1,5 +1,7 @@
 # Tjänstförmedling backend
 
+
+
 ## Scheduele 
 
 | # Our   |      # Weekly      |  # Plans |
@@ -11,6 +13,8 @@
 | Torsdag |   09.00   |   Skolan |
 | Fredag |    13.00   |   Online |
 
+
+
 ## Technologies
 
 **Backend technologies:**
@@ -20,43 +24,52 @@
 **Test technologies:**
 + Jest
 
+
+
 ## TTFHW
 
-+ To access the repository, make sure you are a collaborator, so that you can clone the repo in your workspace folder with this command:
+To access the repository, make sure you are a collaborator, so that you can clone the repo in your workspace folder with this command:
 
 ```javascript
 git clone "https://github.com/Tootfarangi90/Tjanstformedlingssida-BE.git"
 ```
 
-+ How to receive the latest data:
+How to receive the latest data:
 
 ```javascript
 git pull
 ```
 
-+ How to install all the modules:
+How to install all the modules:
 
 ```javascript
 npm i
 ```
 
-+ How to open up the project at Visual studio code: 
+How to open up the project at Visual studio code: 
 
 ```javascript
 code .
 ```
 
+
+
 ## Onboarding
 
-+ Nodemon is saved under dependecies, so you start the project like this:
+Nodemon is saved under dependecies, so you start the project like this:
 
 ```javascript
 npm run dev
 ```
 
-**Script of how to create a development environment**
 
-+ The database environment:
+
+## Script for development environment
+
+We use docker for our development environment and down under you can see how to set up docker.
+
+
++ For the database:
 
 ```javascript
 docker run -d --name test-mongodb \
@@ -68,7 +81,7 @@ docker run -d --name test-mongodb \
     docker logs test-mongodb --follow
 ```
 
-+ The backend environment:
++ For the backend:
 
 ```javascript
 FROM node:12-alpine
@@ -90,8 +103,9 @@ EXPOSE 3000
 CMD [ "node", "app.js" ]
 ```
 
-## Sequence diagram for JWT:
 
+
+## Sequence diagram for JWT:
 
 ```mermaid
 sequenceDiagram
