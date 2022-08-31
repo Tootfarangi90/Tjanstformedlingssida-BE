@@ -27,11 +27,20 @@ router.post('/register', async (req, res, next) => {
 
 })
 
-/*
-router.get('/getusers', (req,res) => {
-    res.json(req.body)
+
+
+router.get('/', (request, response) =>{
+
+    userSchema.find()
+    .then(data => {
+        console.log(data)
+        response.json(data)
+    })
+    .catch(error => response.json(error))
 })
-*/
+
+
+
 
 router.post('/login', async (req,res, next) => {
 try {
