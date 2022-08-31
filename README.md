@@ -11,14 +11,13 @@
 | Torsdag |   09.00   |   Skolan |
 | Fredag |    13.00   |   Online |
 
-
 ## Technologies
 
-### **Backend technologies**
+**Backend technologies:**
 + Nodejs
 + MongoDB
 
-### **Test technologies**
+**Test technologies:**
 + Jest
 
 ## TTFHW
@@ -91,7 +90,7 @@ EXPOSE 3000
 CMD [ "node", "app.js" ]
 ```
 
-### Sequence diagram for JWT
+## Sequence diagram for JWT:
 
 
 ```mermaid
@@ -109,3 +108,5 @@ Client->>User: GET /users/me with JWT in header
 User->>Client: Keeps navigating
 Client->>API: Send JWT token on every request
 ```
+
+
