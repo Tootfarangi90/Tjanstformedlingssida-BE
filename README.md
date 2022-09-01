@@ -108,7 +108,7 @@ CMD [ "node", "app.js" ]
 
 We used jest js for testing our application
 
-You need to run these two commands to start your environment
+Steps for starting your test environment
 
 ```javascript
 npm i jest --save-dev
