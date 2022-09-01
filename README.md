@@ -139,7 +139,7 @@ Give each file one or more group names to that you can easily choose which one t
 ```
 ```javascript
 /**
- * Unit test
+ * Component test
 
 @group component
 
@@ -150,7 +150,7 @@ Give each file one or more group names to that you can easily choose which one t
 ```
 ```javascript
 /**
- * Unit test
+ * Integration test
 
 @group integration
 
@@ -181,6 +181,20 @@ And this
     "runner": "groups"
   },
 
+```
+
+To run the tests simply use these commands 
+
+```javascript
+npm test
+```
+
+```javascript
+npm run component
+```
+
+```javascript
+npm run integration
 ```
 
 ## Sequence diagram for JWT:
