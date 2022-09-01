@@ -10,7 +10,6 @@ router.post('/register', async (req, res, next) => {
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
-        birthday: req.body.birthday,
         occupation: req.body.occupation,
     })
 
@@ -29,7 +28,7 @@ router.post('/register', async (req, res, next) => {
 
 
 
-router.get('/', (request, response) =>{
+router.get('/getusers', (request, response) =>{
 
     userSchema.find()
     .then(data => {
@@ -43,6 +42,7 @@ router.get('/', (request, response) =>{
 
 
 router.post('/login', async (req,res, next) => {
+
 try {
     const { email, password } = req.body
     console.log(req.body)
