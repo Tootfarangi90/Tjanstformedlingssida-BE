@@ -22,7 +22,8 @@
 + MongoDB
 
 **Test technologies:**
-+ Jest
++ Jestjs
+
 
 
 
@@ -103,7 +104,84 @@ EXPOSE 3000
 CMD [ "node", "app.js" ]
 ```
 
+## Script for testing
 
+We used jest js for testing our application
+
+You need to run these two commands to start your environment
+
+```javascript
+npm i jest --save-dev
+
+npm i jest-runner-groups
+
+mkdir __tests__
+
+touch ./__tests/unitTest.js
+
+touch ./__tests/componentTest.js
+
+touch ./__tests/integrationTest.js
+
+```
+Give each file one or more group names to that you can easily choose which one to run.
+
+```javascript
+/**
+ * Unit test
+
+@group unit
+
+*/
+
+...
+
+```
+```javascript
+/**
+ * Unit test
+
+@group component
+
+*/
+
+...
+
+```
+```javascript
+/**
+ * Unit test
+
+@group integration
+
+*/
+
+...
+
+```
+
+Add this to package.json
+
+```javascript
+  "scripts": {
+    ...
+
+    "test": "jest --group=unit",
+    "component": "jest --group=component",
+    "integration": "jest --group=integration"
+  },
+
+...
+
+```
+And this
+
+```javascript
+  "jest": {
+    "runner": "groups"
+  },
+
+```
 
 ## Sequence diagram for JWT:
 
