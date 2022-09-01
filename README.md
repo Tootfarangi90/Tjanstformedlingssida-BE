@@ -110,7 +110,7 @@ We used jest js for testing our application
 
 Steps for starting your test environment
 
-```javascript
+```console
 npm i jest --save-dev
 
 npm i jest-runner-groups
@@ -124,43 +124,9 @@ touch ./__tests/componentTest.js
 touch ./__tests/integrationTest.js
 
 ```
-Give each file one or more group names to that you can easily choose which one to run.
-
-```javascript
-/**
- * Unit test
-
-@group unit
-
-*/
-
-...
-
-```
-```javascript
-/**
- * Component test
-
-@group component
-
-*/
-
-...
-
-```
-```javascript
-/**
- * Integration test
-
-@group integration
-
-*/
-
-...
-
-```
 
 Add this to package.json
+Give each command a group name
 
 ```javascript
   "scripts": {
@@ -174,7 +140,6 @@ Add this to package.json
 ...
 
 ```
-And this
 
 ```javascript
   "jest": {
@@ -183,19 +148,59 @@ And this
 
 ```
 
-To run the tests simply use these commands 
+
+Give each file one or more group names to that you can easily choose which one to run.
 
 ```javascript
-npm test
+/**
+ * Unit test
+
+@group unit
+
+*/
+
+...
+
+```
+
+```console
+ npm test
 ```
 
 ```javascript
+/**
+ * Component test
+
+@group component
+
+*/
+
+...
+
+```
+
+```console
 npm run component
 ```
 
 ```javascript
+/**
+ * Integration test
+
+@group integration
+
+*/
+
+...
+
+```
+
+```console
 npm run integration
 ```
+
+
+
 
 ## Sequence diagram for JWT:
 
