@@ -117,11 +117,11 @@ npm i jest-runner-groups
 
 mkdir __tests__
 
-touch ./__tests/unitTest.js
+touch ./__tests__/unitTest.js
 
-touch ./__tests/componentTest.js
+touch ./__tests__/componentTest.js
 
-touch ./__tests/integrationTest.js
+touch ./__tests__/integrationTest.js
 
 ```
 
