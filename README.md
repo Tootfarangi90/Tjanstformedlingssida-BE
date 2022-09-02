@@ -78,13 +78,6 @@ docker run -d -p 27017:27017 -v ~/mongodb-docker:/data/db --name mymongo mongo:4
     docker ps
     
     docker start mymongo
-
-    -e MONGO_INITDB_ROOT_USERNAME=root \
-    -e MONGO_INITDB_ROOT_PASSWORD=root \
-    
-    mongo
-    
-    docker logs test-mongodb --follow
 ```
 
 + For the backend:
