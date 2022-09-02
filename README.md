@@ -73,10 +73,15 @@ We use docker for our development environment and down under you can see how to 
 + For the database:
 
 ```javascript
-docker run -d --name test-mongodb \
-    -p 27017:27017 \
+docker pull mongo:latest
+docker run -d -p 27017:27017 -v ~/mongodb-docker:/data/db --name mymongo mongo:4.4-rc
+    docker ps
+    
+    docker start mymongo
+
     -e MONGO_INITDB_ROOT_USERNAME=root \
     -e MONGO_INITDB_ROOT_PASSWORD=root \
+    
     mongo
     
     docker logs test-mongodb --follow
