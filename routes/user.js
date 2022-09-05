@@ -3,26 +3,36 @@ const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
 
 router.post('/register', async (req, res, next) => {
-
-
-    const newUser = new userSchema({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: req.body.password,
-        occupation: req.body.occupation,
-    })
-
-    const findUser = await userSchema.findOne({email: req.body.email})
+    try {
+        const {firstname, lastname, email, password, occupation} = req.body
+        console.log(req.body)
         
-        if (findUser) {
-            res.json('Email already exists')
-
-        } else {
-            res.json('Succeeded')
-            newUser.save()
-            console.log(req.body)
+        if (!(firstname, lastname, email, password, occupation)){
+        res.status(400).send({ message: "All inputs are required" })
+        return   
         }
+
+        const checkEmail = await userSchema.findOne({ email })
+
+        if(checkEmail) {
+            res.status(409).send({message: "User already exists, please login"})
+            return
+        }
+
+        const newUser = await userSchema.create({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            occupation: occupation,
+        })
+        res.json({status: 200, message : "User was registered successfully"})
+        return 
+    } catch (error) {
+        console.log('Error Register: ' + error)
+        res.json({ status: 500, message: error })
+        return   
+    }
 
 })
 
@@ -51,7 +61,7 @@ try {
         res.status(400).json({message: "All inputs are required"})
         return
     }
-    const user = await users.findOne({email})
+    const user = await userSchema.findOne({email})
     console.log(user)
     console.log(user.email)
     if(!email) {
