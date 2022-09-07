@@ -12,12 +12,11 @@ mongoose.connect(process.env.DATABASE_URL, () => {
 
 app.use(cors())
 app.use(express.json())
-app.use('/', routes)
+//app.use('/', routes)
 
 app.get("/", (req, res) => {
-    headers={"cache-control": "no-cache"}
-    body={"status": "available"}
-    res.status(200).json(body)
+   
+    res.status(200).json({message:"hello world"})
 })
 
 app.listen(8080, () => {
