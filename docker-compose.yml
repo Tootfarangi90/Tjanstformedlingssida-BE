@@ -1,0 +1,12 @@
+services: 
+    # Mongo db service
+        mongo:
+                container_name: mymongo
+                image: mongo:4.4-rc
+                ports: 
+                - "27017:27017"
+                volumes: 
+                - /mongodb-docker:/data/db
+
+volumes:
+        mongodb-docker:
