@@ -18,3 +18,8 @@ node_modules/
 logs/
 .env
 build/
+
+# Docker
+mongodb-volume/
+
+

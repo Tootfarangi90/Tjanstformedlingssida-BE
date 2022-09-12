@@ -3,10 +3,14 @@ services:
         mongo:
                 container_name: mymongo
                 image: mongo:4.4-rc
+                restart: always
+                environment:
+                        MONGO_INITDB_ROOT_USERNAME: ${USERNAME}
+                        MONGO_INITDB_ROOT_PASSWORD: ${PASSWORD}
                 ports: 
                 - "27017:27017"
                 volumes: 
-                - /mongodb-docker:/data/db
+                - ./mongodb-volume:/data/db
 
 volumes:
-        mongodb-docker:
+        mongodb-volume:
