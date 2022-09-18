@@ -5,9 +5,14 @@ const cors = require('cors')
 require('dotenv').config()
 const routes = require('./routes/user.js')
 
-mongoose.connect(process.env.DATABASE_URL, () => {
+mongoose.connect(process.env.DATABASE_URL)
+   .then(() => {
     console.log("Database is connected")
-})
+   })
+   .catch((error) => {
+    console.log(error)
+   })
+
 
 
 app.use(cors())
