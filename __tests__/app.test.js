@@ -30,7 +30,7 @@ it("respond with 200", async () => {
 
 describe ("Register new user", () => {
     
-    test("respond with 200", async () => {
+    test("given all required fields", async () => {
         const response = await request(app).post("/register").send({
             firstname: "test@test.com",
             lastname: "test@test.com",
@@ -40,6 +40,21 @@ describe ("Register new user", () => {
         })
         expect(response.statusCode).toEqual(200)
     })
+
+    
+    
+    test("given email address is already in use", async () => {
+        const response = await request(app).post("/register").send({
+            firstname: "test@test.com",
+            lastname: "test@test.com",
+            email: "hej@test.com",
+            password: "test",
+            occupation: "test"
+        })
+        expect(response.statusCode).toEqual(409)
+    })
+
+
 })
 
 
