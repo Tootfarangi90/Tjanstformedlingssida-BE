@@ -2,6 +2,7 @@ const request = require ('supertest');
 const app = require ("../app")
 const mongoose = require('mongoose')
 require('dotenv').config()
+const { nanoid } = require ('nanoid')
 
 
 const PORT = process.env.PORT || 8080
@@ -30,11 +31,14 @@ it("respond with 200", async () => {
 
 describe ("Register new user", () => {
     
-    test("given all required fields", async () => {
+    test("given all required fields are correct", async () => {
+        
+        const idLength = 6;
+        
         const response = await request(app).post("/register").send({
             firstname: "test@test.com",
             lastname: "test@test.com",
-            email: "hej6@test.com",
+            email: `${nanoid(idLength)}@test.com`,
             password: "test",
             occupation: "test"
         })
@@ -44,6 +48,7 @@ describe ("Register new user", () => {
     
     
     test("given email address is already in use", async () => {
+        
         const response = await request(app).post("/register").send({
             firstname: "test@test.com",
             lastname: "test@test.com",
@@ -52,6 +57,21 @@ describe ("Register new user", () => {
             occupation: "test"
         })
         expect(response.statusCode).toEqual(409)
+    })
+
+
+    test("given no first name has been entered", async () => {
+        
+        const idLength = 6;
+
+        const response = await request(app).post("/register").send({
+            firstname: undefined,
+            lastname: "test@test.com",
+            email: `${nanoid(idLength)}@test.com`,
+            password: "test",
+            occupation: "test"
+        })
+        expect(response.statusCode).toEqual(400)
     })
 
 
