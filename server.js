@@ -4,9 +4,14 @@ const app = require('./app')
 
 const PORT = process.env.PORT || 8080
 
-mongoose.connect(process.env.DATABASE_URL, () => {
+mongoose.connect(process.env.DATABASE_URL)
+   .then(() => {
     console.log("Database is connected")
-})
+   })
+   .catch((error) => {
+    console.log(error)
+   })
+
 
 
 
