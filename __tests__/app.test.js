@@ -43,7 +43,7 @@ describe("Get all users", () => {
 
 
 
-describe ("Register new user", () => {
+describe ("User registration", () => {
     
     test("given all required fields are correct", async () => {
         
@@ -74,77 +74,51 @@ describe ("Register new user", () => {
     })
 
 
-
-    test("given no first name has been entered", async () => {
+    test("given a field has not been entered", async () => {
         
         const idLength = 6;
 
-        const response = await request(app).post("/register").send({
-            firstname: undefined,
-            lastname: "supertest",
-            email: `${nanoid(idLength)}@test.com`,
-            password: "test",
-            occupation: "test"
-        })
-        expect(response.statusCode).toEqual(400)
-    })
-
-
-    test("given no last name has been entered", async () => {
-        
-        const idLength = 6;
-
-        const response = await request(app).post("/register").send({
-            firstname: "supertest",
-            lastname: undefined,
-            email: `${nanoid(idLength)}@test.com`,
-            password: "test",
-            occupation: "test"
-        })
-        expect(response.statusCode).toEqual(400)
-    })
-
-
-    test("given no email has been entered", async () => {
-
-        const response = await request(app).post("/register").send({
-            firstname: "supertest",
-            lastname: "supertest",
-            email: undefined,
-            password: "test",
-            occupation: "test"
-        })
-        expect(response.statusCode).toEqual(400)
-    })
-
-
-    test("given no password has been entered", async () => {
-        
-        const idLength = 6;
-
-        const response = await request(app).post("/register").send({
-            firstname: "supertest",
-            lastname: "supertest",
-            email: `${nanoid(idLength)}@test.com`,
-            password: undefined,
-            occupation: "test"
-        })
-        expect(response.statusCode).toEqual(400)
-    })
-
-
-    test("given no occupation has been entered", async () => {
-        
-        const idLength = 6;
-
-        const response = await request(app).post("/register").send({
-            firstname: "supertest",
-            lastname: "supertest",
-            email: `${nanoid(idLength)}@test.com`,
-            password: "test",
-            occupation: undefined
-        })
-        expect(response.statusCode).toEqual(400)
+        const testData = [
+            {
+                firstname: undefined,
+                lastname: "supertest",
+                email: `${nanoid(idLength)}@test.com`,
+                password: "test",
+                occupation: "test"
+            },
+            {
+                firstname: "supertest",
+                lastname: undefined,
+                email: `${nanoid(idLength)}@test.com`,
+                password: "test",
+                occupation: "test"
+            },
+            {
+                firstname: "supertest",
+                lastname: "supertest",
+                email: undefined,
+                password: "test",
+                occupation: "test"
+            },
+            {
+                firstname: "supertest",
+                lastname: "supertest",
+                email: `${nanoid(idLength)}@test.com`,
+                password: undefined,
+                occupation: "test"
+            },
+            {
+                firstname: "supertest",
+                lastname: "supertest",
+                email: `${nanoid(idLength)}@test.com`,
+                password: "test",
+                occupation: undefined
+            }
+        ]
+        for (data of testData){
+            const response = await request(app).post("/register").send(data)
+            expect(response.statusCode).toEqual(400)
+        }
     })
 })
 
