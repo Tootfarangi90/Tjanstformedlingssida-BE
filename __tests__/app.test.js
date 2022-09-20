@@ -1,7 +1,7 @@
 /**
  * Unit test
 
-@group app
+@group unit
 
 */
 
@@ -28,12 +28,18 @@ beforeAll(() => {
 })
 
 
+describe("Get all users", () => {
+    test("Should respond with status code 200", async () => {
+        const response = await request(app).get("/getusers")
+        expect(response.statusCode).toEqual(200)
+    })
 
-it("respond with 200", async () => {
-    const response = await request(app).get("/getusers")
-    expect(response.statusCode).toEqual(200)
+    test("Should receive JSON in content-type header", async () => {
+        const response = await request(app).get("/getusers")
+        expect(response.headers['content-type']).toEqual(expect.stringContaining("json"))
+    })
+
 })
-
 
 
 
@@ -44,8 +50,8 @@ describe ("Register new user", () => {
         const idLength = 6;
         
         const response = await request(app).post("/register").send({
-            firstname: "test@test.com",
-            lastname: "test@test.com",
+            firstname: "supertest",
+            lastname: "supertest",
             email: `${nanoid(idLength)}@test.com`,
             password: "test",
             occupation: "test"
@@ -58,8 +64,8 @@ describe ("Register new user", () => {
     test("given email address is already in use", async () => {
         
         const response = await request(app).post("/register").send({
-            firstname: "test@test.com",
-            lastname: "test@test.com",
+            firstname: "supertest",
+            lastname: "supertest",
             email: "hej@test.com",
             password: "test",
             occupation: "test"
@@ -68,13 +74,14 @@ describe ("Register new user", () => {
     })
 
 
+
     test("given no first name has been entered", async () => {
         
         const idLength = 6;
 
         const response = await request(app).post("/register").send({
             firstname: undefined,
-            lastname: "test@test.com",
+            lastname: "supertest",
             email: `${nanoid(idLength)}@test.com`,
             password: "test",
             occupation: "test"
@@ -83,6 +90,62 @@ describe ("Register new user", () => {
     })
 
 
+    test("given no last name has been entered", async () => {
+        
+        const idLength = 6;
+
+        const response = await request(app).post("/register").send({
+            firstname: "supertest",
+            lastname: undefined,
+            email: `${nanoid(idLength)}@test.com`,
+            password: "test",
+            occupation: "test"
+        })
+        expect(response.statusCode).toEqual(400)
+    })
+
+
+    test("given no email has been entered", async () => {
+
+        const response = await request(app).post("/register").send({
+            firstname: "supertest",
+            lastname: "supertest",
+            email: undefined,
+            password: "test",
+            occupation: "test"
+        })
+        expect(response.statusCode).toEqual(400)
+    })
+
+
+    test("given no password has been entered", async () => {
+        
+        const idLength = 6;
+
+        const response = await request(app).post("/register").send({
+            firstname: "supertest",
+            lastname: "supertest",
+            email: `${nanoid(idLength)}@test.com`,
+            password: undefined,
+            occupation: "test"
+        })
+        expect(response.statusCode).toEqual(400)
+    })
+
+
+    test("given no occupation has been entered", async () => {
+        
+        const idLength = 6;
+
+        const response = await request(app).post("/register").send({
+            firstname: "supertest",
+            lastname: "supertest",
+            email: `${nanoid(idLength)}@test.com`,
+            password: "test",
+            occupation: undefined
+        })
+        expect(response.statusCode).toEqual(400)
+    })
 })
 
 
@@ -91,7 +154,3 @@ afterAll( () => {
     mongoose.disconnect()
     server.close()
 })
-
-
-
-
