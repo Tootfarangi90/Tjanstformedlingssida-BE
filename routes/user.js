@@ -2,6 +2,8 @@ const express = require("express")
 const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
 
+
+
 router.post('/register', async (req, res, next) => {
 
     try {
@@ -40,11 +42,10 @@ router.post('/register', async (req, res, next) => {
 
 
 router.get('/getusers', (request, response) =>{
-
+    
     userSchema.find()
     .then(data => {
-        console.log(data)
-        response.json(data)
+        response.json({ status: 200, message: data})
     })
     .catch(error => response.json(error))
     
