@@ -20,4 +20,5 @@ logs/
 build/
 
 # Jest test Coverage
-coverage/
+/coverage/
+/coverage.data
