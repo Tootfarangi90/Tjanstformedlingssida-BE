@@ -11,7 +11,7 @@ router.post('/register', async (req, res, next) => {
         const checkEmail = await userSchema.findOne({ email })
         console.log(req.body)
         
-        if (!(firstname, lastname, email, password, occupation)){
+        if (!(firstname && lastname && email && password && occupation)){
         res.status(400).send({ message: "All inputs are required" })
         return   
         }
