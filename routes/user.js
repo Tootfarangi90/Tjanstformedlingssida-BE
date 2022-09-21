@@ -3,7 +3,6 @@ const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
 
 
-
 router.post('/register', async (req, res, next) => {
 
     try {
@@ -40,7 +39,6 @@ router.post('/register', async (req, res, next) => {
 })
 
 
-
 router.get('/getusers', (request, response) =>{
     
     userSchema.find()
@@ -50,8 +48,6 @@ router.get('/getusers', (request, response) =>{
     .catch(error => response.json(error))
     
 })
-
-
 
 
 router.post('/login', async (req,res, next) => {

@@ -12,7 +12,7 @@
     "integrationtest": "jest  --group=integration"
   },
   "pre-commit": [
-    "componenttest"
+    "test"
   ],
   "repository": {
     "type": "git",
