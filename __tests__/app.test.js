@@ -112,7 +112,7 @@ describe ("User registration", () => {
         ];
         for (data of testData){
             const response = await request(app).post("/register").send(data);
-            expect(response.statusCode).toEqual(400);
+            expect(response.statusCode).toEqual(401);
         };
     });
 });
