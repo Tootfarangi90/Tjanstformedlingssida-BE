@@ -8,13 +8,15 @@ router.post('/register', async (req, res, next) => {
 
     try {
         const {firstname, lastname, email, password, occupation} = req.body
-        const checkEmail = await userSchema.findOne({ email })
-        console.log(req.body)
-        
-        if (!(firstname, lastname, email, password, occupation)){
+
+        if (!(firstname && lastname && email && password && occupation)){
         res.status(400).send({ message: "All inputs are required" })
         return   
         }
+        console.log(req.body)
+
+        const checkEmail = await userSchema.findOne({ email })
+        
 
         if(checkEmail) {
             res.status(409).send({message: "User already exists, please login"})
