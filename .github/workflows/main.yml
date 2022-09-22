@@ -1,32 +1,28 @@
-name: Main
-on:
-  push:
-    branches: [ main ] 
-
+name: Main push
+on: push
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x 
       - name: npm install 
-      - run: npm i
+        run: npm i
       - name: Run tests
-      - run: npm test
-
+        run: npm test
   deploy:
+      needs: [test]
       runs-on: ubuntu-latest
-      needs: [build]
     steps:
-      - uses: actions/checkout@v3
-      - uses: akhileshns/heroku-deploy@v3.12.12 
+        uses: actions/checkout@v3
+        uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} 
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-      - run: git push heroku master
+          procfile: "web: node server.js",
+        run: git push heroku master
       
