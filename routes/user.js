@@ -9,13 +9,14 @@ router.post('/register', async (req, res, next) => {
     try {
         const {firstname, lastname, email, password, occupation} = req.body
 
+        const checkEmail = await userSchema.findOne({ email })
+        console.log(req.body)
+        
         if (!(firstname && lastname && email && password && occupation)){
         res.status(400).send({ message: "All inputs are required" })
         return   
         }
         console.log(req.body)
-
-        const checkEmail = await userSchema.findOne({ email })
         
 
         if(checkEmail) {
@@ -42,7 +43,6 @@ router.post('/register', async (req, res, next) => {
 })
 
 
-
 router.get('/getusers', (request, response) =>{
     
     userSchema.find()
@@ -52,10 +52,6 @@ router.get('/getusers', (request, response) =>{
     .catch(error => response.json(error))
     
 })
-
-
-
-
 router.post('/login', async (req,res, next) => {
 
     try {
