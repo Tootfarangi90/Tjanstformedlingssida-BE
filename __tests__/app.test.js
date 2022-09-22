@@ -119,6 +119,48 @@ describe ("User registration", () => {
 });
 
 
+describe ("Login", () => {
+    
+    test("given login details are correct", async () => {
+        
+        const response = await request(app).post("/login").send({
+            email: "alreadyExistingEmail@test.com",
+            password: "test"
+        });
+        expect(response.statusCode).toEqual(200);
+    });
+
+
+    test("given a field has not been entered", async () => {
+        
+        const testData = [
+            {
+                email: undefined,
+                password: "test"
+            },
+            {
+                email: "alreadyExistingEmail@test.com",
+                password: undefined
+            }
+        ];
+        for (data of testData){
+            const response = await request(app).post("/login").send(data);
+            expect(response.statusCode).toEqual(400);
+        };
+    });
+
+
+    test("given user does not exist", async () => {
+        
+        const response = await request(app).post("/login").send({
+            email: "nonExistingEmail@test.com",
+            password: "test"
+        });
+        expect(response.statusCode).toEqual(404);
+    });
+});
+
+
 
 afterAll( () => {
     mongoose.disconnect();
