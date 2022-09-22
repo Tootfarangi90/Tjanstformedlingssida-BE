@@ -3,22 +3,35 @@ const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
 
 
+
+router.get('/getusers', (request, response) =>{
+    
+    userSchema.find()
+    .then(data => {
+        response.json({ status: 200, users:data.length, data})
+    })
+    .catch(error => response.json(error));
+});
+
+
+
 router.post('/register', async (req, res, next) => {
 
     try {
-        const {firstname, lastname, email, password, occupation} = req.body
-        const checkEmail = await userSchema.findOne({ email })
-        console.log(req.body)
+        const {firstname, lastname, email, password, occupation} = req.body;
+        const checkEmail = await userSchema.findOne({ email });
+        console.log(req.body);
+        
         
         if (!(firstname && lastname && email && password && occupation)){
-        res.status(400).send({ message: "All inputs are required" })
-        return   
-        }
+        res.status(400).send({ message: "All inputs are required" });
+        return;
+        };
 
         if(checkEmail) {
-            res.status(409).send({message: "User already exists, please login"})
-            return
-        }
+            res.status(409).send({message: "User already exists, please login"});
+            return;
+        };
 
         const newUser = await userSchema.create({
             firstname: firstname,
@@ -26,28 +39,18 @@ router.post('/register', async (req, res, next) => {
             email: email,
             password: password,
             occupation: occupation
-        })
-        res.json({status: 200, message : "User was registered successfully"})
-        return 
+        });
+
+        res.json({status: 200, message : "User was registered successfully"});
+        return;
 
     } catch (error) {
-        console.log('Error Register: ' + error)
-        res.json({ status: 500, message: error })
-        return   
-    }
+        console.log('Error Register: ' + error);
+        res.json({ status: 500, message: error });
+        return;
+    };
+});
 
-})
-
-
-router.get('/getusers', (request, response) =>{
-    
-    userSchema.find()
-    .then(data => {
-        response.json({ status: 200, message: data})
-    })
-    .catch(error => response.json(error))
-    
-})
 
 
 router.post('/login', async (req,res, next) => {
@@ -84,7 +87,6 @@ router.post('/login', async (req,res, next) => {
         res.json({message: error})
         return 
     }
-
 })
 
 

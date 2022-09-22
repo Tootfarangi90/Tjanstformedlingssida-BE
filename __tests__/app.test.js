@@ -52,6 +52,7 @@ describe ("User registration", () => {
             occupation: "test"
         });
         expect(response.statusCode).toEqual(200);
+        console.log(response.calls)
     });
 
     
@@ -61,7 +62,7 @@ describe ("User registration", () => {
         const response = await request(app).post("/register").send({
             firstname: "supertest",
             lastname: "supertest",
-            email: "hej@test.com",
+            email: "alreadyExistingEmail@test.com",
             password: "test",
             occupation: "test"
         });
