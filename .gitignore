@@ -22,3 +22,4 @@ build/
 # Jest test Coverage
 /coverage/
 /coverage.data
+coverage/
