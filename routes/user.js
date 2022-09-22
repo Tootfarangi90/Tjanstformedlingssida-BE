@@ -20,7 +20,7 @@ router.post('/register', async (req, res, next) => {
     try {
         const {firstname, lastname, email, password, occupation} = req.body;
         const checkEmail = await userSchema.findOne({ email });
-        console.log(req.body);
+        
         
         
         if (!(firstname && lastname && email && password && occupation)){
@@ -57,28 +57,28 @@ router.post('/login', async (req,res, next) => {
 
     try {
         const { email, password } = req.body
-        console.log(req.body)
-
+        
+        
         if(!(email && password)) {
             res.status(400).json({message: "All inputs are required"})
             return
         }
+
         const user = await userSchema.findOne({email})
         console.log(user)
-        console.log(user.email)
-        if(!email) {
-            res.json({status: 404, message: "user not found"})
+        if(!user) {
+            res.status(404).json({message: "User not found"})
             return
         }
-        console.log(user.password)
 
-        const passwordValidation = await password === user.password
+        const passwordValidation = password === user.password
         if(!passwordValidation) {
-            res.json({status: 401, message: "Invalid password"})
+            res.status(401).json({message: "Invalid password"})
             return
-        }    
-        if(user && passwordValidation) {
-            res.json({status: 200, message: "Welcome"})
+        }
+
+        if(user.email && passwordValidation) {
+            res.status(200).json({message: "Welcome"})
             return
         }
     
