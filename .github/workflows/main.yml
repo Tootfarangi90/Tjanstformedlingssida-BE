@@ -17,6 +17,7 @@ jobs:
           node-version: 16.x
           cache: "npm"
       - run: npm ci
+      - run: npm run build --if-present
 
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.8.0
@@ -26,7 +27,6 @@ jobs:
           mongodb-password: {{secrets.MONGODB_PASSWORD}}
           mongodb-db: {{secrets.DATABASE_URL}}          
  
-      - run: npm run build --if-present
       - run: npm test componenttest
 
   deploy:
