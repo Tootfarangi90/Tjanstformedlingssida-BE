@@ -8,7 +8,6 @@
     "dev": "nodemon server.js",
     "deploy": "git push heroku main",
     "test": "jest --watchAll=false",
-    "coverage": "jest --collectCoverage --",
     "unittest": "jest --group=unit",
     "componenttest": "jest  --group=component",
     "integrationtest": "jest  --group=integration"
