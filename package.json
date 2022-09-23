@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "deploy": "git push heroku main",
-    "test": "jest --group=-integration --group=-component",
+    "test": "jest --watchAll",
     "coverage": "jest --collectCoverage --",
     "unittest": "jest --group=unit",
     "componenttest": "jest  --group=component",
