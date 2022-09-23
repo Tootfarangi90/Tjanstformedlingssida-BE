@@ -16,7 +16,7 @@ jobs:
  
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm test 
+      - run: npm test componenttest
 
   deploy:
     needs: [test]
