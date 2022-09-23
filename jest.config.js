@@ -8,9 +8,8 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-    statements: 50
+    statements: 40
     }
   },
   verbose: true
 }
-

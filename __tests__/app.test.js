@@ -158,6 +158,16 @@ describe ("Login", () => {
         });
         expect(response.statusCode).toEqual(404);
     });
+
+
+    test("given password is invalid", async () => {
+        
+        const response = await request(app).post("/login").send({
+            email: "alreadyExistingEmail@test.com",
+            password: "invalidPassword"
+        });
+        expect(response.statusCode).toEqual(401);
+    });
 });
 
 
