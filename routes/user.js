@@ -8,7 +8,7 @@ router.get('/getusers', (request, response) =>{
     
     userSchema.find()
     .then(data => {
-        response.json({ status: 200, users:data.length, data})
+        response.json({users:data.length, data})
     })
     .catch(error => response.json(error));
 });
@@ -46,7 +46,7 @@ router.post('/register', async (req, res, next) => {
 
     } catch (error) {
         console.log('Error Register: ' + error);
-        res.json({ status: 500, message: error });
+        res.status(500)({ error });
         return;
     };
 });
@@ -78,7 +78,7 @@ router.post('/login', async (req,res, next) => {
         }
 
         if(user.email && passwordValidation) {
-            res.status(200).json({message: "Welcome"})
+            res.json({message: "Welcome"})
             return
         }
     
