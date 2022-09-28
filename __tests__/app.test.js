@@ -19,11 +19,15 @@ const PORT = process.env.PORT || 8080
 
 let server = null
 beforeAll(() => {
-    mongoose.connect(process.env.DATABASE_URL, () => {
-        console.log("Database is connected");
+    mongoose.connect(process.env.DATABASE_URL, () => {})
+    .then(() => {
+        console.log("Database is connected")
+    })
+    .catch((error) => {
+        console.log(error)
     })
     server = app.listen(PORT, () => {
-        console.log(`Port ${PORT} ready`);
+    console.log(`Port ${PORT} ready`);
     })
 })
 
