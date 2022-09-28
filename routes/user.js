@@ -11,6 +11,7 @@ router.get('/getusers', (request, response) =>{
         response.json({users:data.length, data})
     })
     .catch(error => response.json(error));
+    console.log("error")
 });
 
 
