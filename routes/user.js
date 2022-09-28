@@ -45,8 +45,8 @@ router.post('/register', async (req, res, next) => {
         return;
 
     } catch (error) {
-        console.log('Error Register: ' + error);
-        res.status(500)({ error });
+        console.log('Error in user registration: ' + error);
+        res.status(500).send({ error });
         return;
     };
 });
@@ -84,7 +84,7 @@ router.post('/login', async (req,res, next) => {
     
     } catch (error) {
         console.log('Error reason: ' + error)
-        res.json({message: error})
+        res.status(500).send({ error });
         return 
     }
 })
