@@ -74,7 +74,7 @@ router.post('/login', async (req,res, next) => {
 
         const passwordValidation = password === user.password
         if(!passwordValidation) {
-            res.status(401).json({message: "Invalid password"})
+            res.status(401).json({message: "Invalid password;"})
             return
         }
 
