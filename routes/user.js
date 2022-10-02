@@ -1,6 +1,10 @@
 const express = require("express")
 const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
+const jwt = require("jsonwebtoken")
+require('dotenv').config()
+
+const bcrypt = require('bcrypt')
 
 
 
@@ -22,31 +26,40 @@ router.post('/register', async (req, res, next) => {
         const {firstname, lastname, email, password, occupation} = req.body;
         const checkEmail = await userSchema.findOne({ email });
         
+        bcrypt.genSalt(10, (error, salt) => {
+            bcrypt.hash(password, salt).then((hash) => {
+                userSchema.create({
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    password: hash,
+                    occupation: occupation
+                })
+                res.json({message: "User registered"})
+
+                if(error) {
+                    console.log("hash error:" + error)
+                }
+
+            }).catch((error) => {
+                console.log("salt error:" + error)
+            })
+    })
         
         
         if (!(firstname && lastname && email && password && occupation)){
         res.status(400).send({ message: "All inputs are required" });
-        return;
-        };
+        return
+        }
 
         if(checkEmail) {
             res.status(409).send({message: "User already exists, please login"});
             return;
-        };
+        }
 
-        const newUser = await userSchema.create({
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password,
-            occupation: occupation
-        });
-
-        res.json({status: 200, message : "User was registered successfully"});
-        return;
 
     } catch (error) {
-        console.log('Error in user registration: ' + error);
+        console.log(error);
         res.status(500).send({ error });
         return;
     };
@@ -58,6 +71,8 @@ router.post('/login', async (req,res, next) => {
 
     try {
         const { email, password } = req.body
+        const user = await userSchema.findOne({email})
+        const dbPassword = user.password
         
         
         if(!(email && password)) {
@@ -65,30 +80,45 @@ router.post('/login', async (req,res, next) => {
             return
         }
 
-        const user = await userSchema.findOne({email})
-        console.log(user)
         if(!user) {
             res.status(404).json({message: "User not found"})
             return
         }
 
-        const passwordValidation = password === user.password
-        if(!passwordValidation) {
-            res.status(401).json({message: "Invalid password;"})
-            return
-        }
 
-        if(user.email && passwordValidation) {
-            res.json({message: "Welcome"})
-            return
-        }
+        bcrypt.compare(password, dbPassword)
+        .then((userMatched) => {
+            if(userMatched) {
+               
+                const token = jwt.sign({
+                    email: req.body.email,
+                    password: req.body.password
+                },
+                process.env.JWT_SECRET)
+
+                /*
+                res.cookie("access-token", token, {
+                    maxAge: 3600000
+                })
+                */
+
+                console.log(token)
+                
+                res.json({message: "Welcome", user: token})
+                return
+            } else {
+                res.status(401).json({message: "Invalid password"})
+            }
+        }).catch((error) => {
+            console.log("compare error:" + error)
+        })
+
     
     } catch (error) {
         console.log('Error reason: ' + error)
-        res.status(500).send({ error });
+        res.status(500).send({ error, user: false });
         return 
     }
 })
-
 
 module.exports = router;
