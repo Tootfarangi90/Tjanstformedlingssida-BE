@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router({})
+const jwt = require('jsonwebtoken')
 const userSchema = require('../mongooseSchema/userSchema')
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
