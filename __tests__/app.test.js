@@ -120,9 +120,9 @@ describe ("User registration", () => {
 });
 
 
-/*
-describe ("Login", () => {
 
+describe ("Login", () => {
+/*
 
     test("given login details are correct", async () => {
         
@@ -162,6 +162,7 @@ describe ("Login", () => {
         });
         expect(response.statusCode).toEqual(404);
     });
+*/
 
 
 
@@ -175,7 +176,7 @@ describe ("Login", () => {
     });
     
 });
-*/
+
 
 
 afterAll( () => {

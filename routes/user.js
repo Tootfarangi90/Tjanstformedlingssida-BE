@@ -25,25 +25,6 @@ router.post('/register', async (req, res, next) => {
         const {firstname, lastname, email, password, occupation} = req.body;
         const checkEmail = await userSchema.findOne({ email });
         
-         bcrypt.genSalt(10, (error, salt) => {
-            bcrypt.hash(password, salt).then((hash) => {
-                userSchema.create({
-                    firstname: firstname,
-                    lastname: lastname,
-                    email: email,
-                    password: hash,
-                    occupation: occupation
-                })
-                res.json({message: "User registered"})
-
-                if(error) {
-                    console.log("hash error:" + error)
-                }
-
-            }).catch((error) => {
-                console.log("salt error:" + error)
-            })
-    })
         
         
         if (!(firstname && lastname && email && password && occupation)){
@@ -55,6 +36,15 @@ router.post('/register', async (req, res, next) => {
             res.status(409).send({message: "User already exists, please login"});
             return;
         }
+
+        const newUser = userSchema.create({
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            occupation: occupation
+        })
+        res.json({message: "User registered"})
 
 
     } catch (error) {
@@ -85,7 +75,7 @@ router.post('/login', async (req,res, next) => {
         }
 
 
-        bcrypt.compare(password, dbPassword)
+        await bcrypt.compare(password, dbPassword)
         .then((userMatched) => {
             if(userMatched) {
                
