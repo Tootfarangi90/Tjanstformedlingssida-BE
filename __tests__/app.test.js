@@ -71,8 +71,6 @@ describe ("User registration", () => {
     });
 
 
-    /*
-
     test("given a field has not been entered", async () => {
         
         const idLength = 6;
@@ -122,8 +120,10 @@ describe ("User registration", () => {
 });
 
 
+/*
 describe ("Login", () => {
-    
+
+
     test("given login details are correct", async () => {
         
         const response = await request(app).post("/login").send({
@@ -164,6 +164,7 @@ describe ("Login", () => {
     });
 
 
+
     test("given password is invalid", async () => {
         
         const response = await request(app).post("/login").send({
@@ -172,9 +173,9 @@ describe ("Login", () => {
         });
         expect(response.statusCode).toEqual(401);
     });
-    */
+    
 });
-
+*/
 
 
 afterAll( () => {

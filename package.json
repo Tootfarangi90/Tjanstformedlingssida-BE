@@ -10,7 +10,8 @@
     "test": "jest --watchAll=false",
     "unittest": "jest --group=unit",
     "componenttest": "jest  --group=component",
-    "integrationtest": "jest  --group=integration"
+    "integrationtest": "jest  --group=integration",
+    "prepare": "husky install"
   },
   "pre-commit": [
     "test"

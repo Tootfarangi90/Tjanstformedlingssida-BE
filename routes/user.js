@@ -1,12 +1,10 @@
 const express = require("express")
 const router = express.Router({})
-const jwt = require('jsonwebtoken')
 const userSchema = require('../mongooseSchema/userSchema')
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
 
 const bcrypt = require('bcrypt')
-
 
 
 router.get('/getusers', (request, response) =>{
@@ -27,7 +25,7 @@ router.post('/register', async (req, res, next) => {
         const {firstname, lastname, email, password, occupation} = req.body;
         const checkEmail = await userSchema.findOne({ email });
         
-        bcrypt.genSalt(10, (error, salt) => {
+         bcrypt.genSalt(10, (error, salt) => {
             bcrypt.hash(password, salt).then((hash) => {
                 userSchema.create({
                     firstname: firstname,
