@@ -37,14 +37,21 @@ router.post('/register', async (req, res, next) => {
             return;
         }
 
-        const newUser = userSchema.create({
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            password: password,
-            occupation: occupation
-        })
-        res.json({message: "User registered"})
+        await bcrypt.genSalt(10, (error, salt) => {
+             bcrypt.hash(password, salt).then((hash) => {
+                userSchema.create({
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    password: hash,
+                    occupation: occupation
+                })
+                res.json({message: "User registered"})
+
+            }).catch((error) => {
+                console.log("salt error:" + error)
+            })
+    })
 
 
     } catch (error) {
