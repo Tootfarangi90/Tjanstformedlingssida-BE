@@ -3,7 +3,6 @@ const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
-
 const bcrypt = require('bcrypt')
 
 
@@ -57,8 +56,7 @@ router.post('/register', async (req, res, next) => {
             }).catch((error) => {
                 console.log("salt error:" + error)
             })
-    })
-
+        })
 
     } catch (error) {
         console.log(error);
@@ -124,14 +122,21 @@ router.post('/login', async (req,res, next) => {
 
 
 router.patch('/advertisment', async (request, response) =>{
-    console.log(request.body.advertisment)
-    try{
-        await userSchema.updateOne({_id: request.body._id},{$push:{advertisment: request.body.advertisment}});
-        response.json('Advertisment added');
+    const {category, title, description, price} = request.body.advertisment[0];
+    
+    if (!(category && title && description && price)){
+        res.status(400).send({ message: "All inputs are required" });
+        return
+        }
+    else{
+        try{
+            await userSchema.updateOne({_id: request.body._id},{$push:{advertisment: request.body.advertisment}});
+            response.json('Advertisment added');
+        }
+        catch (error){
+            console.log(error.message)
+        };
     }
-    catch (error){
-        console.log(error.message)
-    };
 })
 
 module.exports = router;
