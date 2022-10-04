@@ -49,9 +49,10 @@ describe ("User registration", () => {
         const response = await request(app).post("/register").send({
             firstname: "supertest",
             lastname: "supertest",
+            username: `${nanoid(idLength)}`,
             email: `${nanoid(idLength)}@test.com`,
             password: "test",
-            occupation: "test"
+            advertisment: ["test"]
         });
         expect(response.statusCode).toEqual(200);
     });
@@ -60,12 +61,15 @@ describe ("User registration", () => {
     
     test("given email address is already in use", async () => {
         
+        const idLength = 6;
+
         const response = await request(app).post("/register").send({
             firstname: "supertest",
             lastname: "supertest",
+            username: `${nanoid(idLength)}`,
             email: "alreadyExistingEmail@test.com",
             password: "test",
-            occupation: "test"
+            advertisment: ["test"]
         });
         expect(response.statusCode).toEqual(409);
     });
@@ -79,37 +83,34 @@ describe ("User registration", () => {
             {
                 firstname: undefined,
                 lastname: "supertest",
+                username: `${nanoid(idLength)}`,
                 email: `${nanoid(idLength)}@test.com`,
                 password: "test",
-                occupation: "test"
+                advertisment: ["test"]
             },
             {
                 firstname: "supertest",
                 lastname: undefined,
+                username: `${nanoid(idLength)}`,
                 email: `${nanoid(idLength)}@test.com`,
                 password: "test",
-                occupation: "test"
+                advertisment: ["test"]
             },
             {
                 firstname: "supertest",
                 lastname: "supertest",
+                username: `${nanoid(idLength)}`,
                 email: undefined,
                 password: "test",
-                occupation: "test"
+                advertisment: ["test"]
             },
             {
                 firstname: "supertest",
                 lastname: "supertest",
+                username: `${nanoid(idLength)}`,
                 email: `${nanoid(idLength)}@test.com`,
                 password: undefined,
-                occupation: "test"
-            },
-            {
-                firstname: "supertest",
-                lastname: "supertest",
-                email: `${nanoid(idLength)}@test.com`,
-                password: "test",
-                occupation: undefined
+                advertisment: ["test"]
             }
         ];
         for (let data of testData){

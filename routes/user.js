@@ -22,18 +22,24 @@ router.get('/getusers', (request, response) =>{
 router.post('/register', async (req, res, next) => {
 
     try {
-        const {firstname, lastname, email, password, occupation} = req.body;
+        const {firstname, lastname, email, password, username} = req.body;
         const checkEmail = await userSchema.findOne({ email });
+        const checkUsername = await userSchema.findOne({ username });
         
         
         
-        if (!(firstname && lastname && email && password && occupation)){
+        if (!(firstname && lastname && email && password && username)){
         res.status(400).send({ message: "All inputs are required" });
         return
         }
 
         if(checkEmail) {
-            res.status(409).send({message: "User already exists, please login"});
+            res.status(409).send({message: "Email exists, please login"});
+            return;
+        }
+
+        if(checkUsername) {
+            res.status(409).send({message: "Username already exists, please login"});
             return;
         }
 
@@ -42,9 +48,9 @@ router.post('/register', async (req, res, next) => {
                 userSchema.create({
                     firstname: firstname,
                     lastname: lastname,
+                    username: username,
                     email: email,
-                    password: hash,
-                    occupation: occupation
+                    password: hash
                 })
                 res.json({message: "User registered"})
 
@@ -85,7 +91,7 @@ router.post('/login', async (req,res, next) => {
         await bcrypt.compare(password, dbPassword)
         .then((userMatched) => {
             if(userMatched) {
-               
+            
                 const token = jwt.sign({
                     email: req.body.email,
                     password: req.body.password
@@ -115,6 +121,18 @@ router.post('/login', async (req,res, next) => {
         res.status(500).send({ error, user: false });
         return 
     }
+})
+
+
+router.patch('/advertisment', async (request, response) =>{
+
+    try{
+        await userSchema.updateOne({_id: request.body._id},{$push:{advertisment: request.body.advertisment}});
+        response.json('Advertisment added');
+    }
+    catch (error){
+        console.log(error.message)
+    };
 })
 
 module.exports = router;
