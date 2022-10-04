@@ -74,7 +74,6 @@ router.post('/login', async (req,res, next) => {
     try {
         const { email, password } = req.body
         const user = await userSchema.findOne({email})
-        const dbPassword = user.password
         
         
         if(!(email && password)) {
@@ -87,7 +86,7 @@ router.post('/login', async (req,res, next) => {
             return
         }
 
-
+        const dbPassword = user.password
         await bcrypt.compare(password, dbPassword)
         .then((userMatched) => {
             if(userMatched) {
