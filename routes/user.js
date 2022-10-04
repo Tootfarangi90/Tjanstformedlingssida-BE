@@ -125,7 +125,7 @@ router.post('/login', async (req,res, next) => {
 
 
 router.patch('/advertisment', async (request, response) =>{
-
+    console.log(request.body.advertisment)
     try{
         await userSchema.updateOne({_id: request.body._id},{$push:{advertisment: request.body.advertisment}});
         response.json('Advertisment added');
