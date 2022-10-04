@@ -49,7 +49,8 @@ router.post('/register', async (req, res, next) => {
                     lastname: lastname,
                     username: username,
                     email: email,
-                    password: hash
+                    password: hash,
+                    creationDate: Date.now()
                 })
                 res.json({message: "User registered"})
 
