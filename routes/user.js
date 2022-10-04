@@ -125,7 +125,7 @@ router.patch('/advertisment', async (request, response) =>{
     const {category, title, description, price} = request.body.advertisment[0];
     
     if (!(category && title && description && price)){
-        res.status(400).send({ message: "All inputs are required" });
+        response.status(400).send({ message: "All inputs are required" });
         return
         }
     else{
@@ -134,7 +134,7 @@ router.patch('/advertisment', async (request, response) =>{
             response.json('Advertisment added');
         }
         catch (error){
-            console.log(error.message)
+            console.log(error)
         };
     }
 })
