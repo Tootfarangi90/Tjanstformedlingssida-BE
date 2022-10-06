@@ -124,15 +124,28 @@ router.post('/login', async (req,res, next) => {
 })
 
 
-router.patch('/advertisment', async (request, response) =>{
-    console.log(request.body.advertisment)
+router.patch("/advertisment/:id", async (request, response) =>{
+    console.log(request.body)
     try{
-        await userSchema.updateOne({_id: request.body._id},{$push:{advertisment: request.body.advertisment}});
-        response.json('Advertisment added');
+        await userSchema.updateOne({_id: request.params.id},{$push:{advertisment: request.body}});
+        response.json('Advertisment added')
+        console.log(request.params.id)
     }
     catch (error){
-        console.log(error.message)
+        console.log(error)
     };
 })
+
+
+router.get('/getusers/:id', async (req, res) => {
+
+    try {
+        const userFound = await userSchema.findOne({ _id: req.params.id })
+        return res.status(200).json(userFound)
+      } catch(err) {
+        console.log(err)
+      }
+});
+
 
 module.exports = router;
