@@ -28,17 +28,17 @@ router.post('/register', async (req, res, next) => {
         
         
         if (!(firstname && lastname && email && password && username)){
-        res.status(400).send({ message: "All inputs are required" });
+        res.status(400).send({ message: "Alla fält är obligatoriska!" });
         return
         }
 
         if(checkEmail) {
-            res.status(409).send({message: "Email exists, please login"});
+            res.status(409).send({message: "Emailadressen finns redan, var vänlig att logga in!"});
             return;
         }
 
         if(checkUsername) {
-            res.status(409).send({message: "Username already exists, please login"});
+            res.status(409).send({message: "Användarnamnet finns redan, var vänlig att logga in!"});
             return;
         }
 
@@ -52,7 +52,7 @@ router.post('/register', async (req, res, next) => {
                     password: hash,
                     creationDate: Date.now()
                 })
-                res.json({message: "User registered"})
+                res.json({message: "Användare registrerad!"})
 
             }).catch((error) => {
                 console.log("salt error:" + error)
@@ -76,12 +76,12 @@ router.post('/login', async (req,res, next) => {
         
         
         if(!(email && password)) {
-            res.status(400).json({message: "All inputs are required"})
+            res.status(400).json({message: "Alla fält är obligatoriska!"})
             return
         }
 
         if(!user) {
-            res.status(404).json({message: "User not found"})
+            res.status(404).json({message: "Användare finns inte, var vänlig försök igen!"})
             return
         }
 
@@ -104,10 +104,10 @@ router.post('/login', async (req,res, next) => {
 
                 console.log(token)
                 
-                res.json({message: "Welcome", user: token})
+                res.json({message: "Välkommen", user: token})
                 return
             } else {
-                res.status(401).json({message: "Invalid password"})
+                res.status(401).json({message: "Lösenordet är inkorrekt!"})
             }
         }).catch((error) => {
             console.log("compare error:" + error)
@@ -126,13 +126,13 @@ router.patch('/advertisment/:id', async (request, response) =>{
     const {category, title, description, price} = request.body;
     
     if (!(category && title && description && price)){
-        response.status(400).send({ message: "All inputs are required" });
+        response.status(400).send({ message: "Alla fält är obligatoriska!" });
         return
         }
     else{
         try{
             await userSchema.updateOne({_id: request.params.id},{$push:{advertisment: request.body}});
-            response.json('Advertisment added');
+            response.json('Tjänsten är utannonserad!');
             console.log(request.params.id)
         }
         catch (error){
