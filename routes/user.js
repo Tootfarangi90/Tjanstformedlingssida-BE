@@ -25,8 +25,6 @@ router.post('/register', async (req, res, next) => {
         const checkEmail = await userSchema.findOne({ email });
         const checkUsername = await userSchema.findOne({ username });
         
-        
-        
         if (!(firstname && lastname && email && password && username)){
         res.status(400).send({ message: "Alla fält är obligatoriska!" });
         return
