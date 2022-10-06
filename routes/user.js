@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
+const postSchema = require('../mongooseSchema/postSchema')
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
 const bcrypt = require('bcrypt')
@@ -105,7 +106,7 @@ router.post('/login', async (req,res, next) => {
                 res.json({message: "Välkommen", user: token})
                 return
             } else {
-                res.status(401).json({message: "Lösenordet är inkorrekt!"})
+                res.status(401).json({message: "Lösenordet är fel, var vänlig försök igen!"})
             }
         }).catch((error) => {
             console.log("compare error:" + error)
@@ -120,35 +121,30 @@ router.post('/login', async (req,res, next) => {
 })
 
 
-router.patch('/advertisment/:id', async (request, response) =>{
+router.post('/advertisement', async (request, response) =>{
     const {category, title, description, price} = request.body;
     
     if (!(category && title && description && price)){
         response.status(400).send({ message: "Alla fält är obligatoriska!" });
         return
-        }
-    else{
+
+    } else {
+
         try{
-            await userSchema.updateOne({_id: request.params.id},{$push:{advertisment: request.body}});
-            response.json('Tjänsten är utannonserad!');
-            console.log(request.params.id)
+            postSchema.create({
+                category: category,
+                title: title,
+                description: description,
+                price: price,
+                creationDate: Date.now()
+            })
+            response.json({message: "Annons skapad!"})
         }
         catch (error){
             console.log(error)
         };
     }
 })
-
-
-router.get('/getusers/:id', async (req, res) => {
-
-    try {
-        const userFound = await userSchema.findOne({ _id: req.params.id })
-        return res.status(200).json(userFound)
-      } catch(err) {
-        console.log(err)
-      }
-});
 
 
 module.exports = router;
