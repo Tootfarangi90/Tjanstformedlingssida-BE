@@ -24,6 +24,10 @@
 **Test technologies:**
 + Jestjs
 
+**Other technologies:**
++ husky -pre commit
++ git actions
+
 
 
 
