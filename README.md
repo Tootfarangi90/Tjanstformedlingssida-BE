@@ -47,7 +47,7 @@ How to install all the modules:
 npm i
 ```
 
-How to open up the project at Visual studio code: 
+How to open up the project to Visual studio code: 
 
 ```javascript
 code .
@@ -67,7 +67,7 @@ npm run dev
 
 ## Script for development environment
 
-We use docker for our development environment and down under you can see how to set up docker.
+We use docker for our development environment. Down below you can see how to set up docker.
 
 
 + For the database:
