@@ -3,7 +3,6 @@ const router = express.Router({})
 const userSchema = require('../mongooseSchema/userSchema')
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
-
 const bcrypt = require('bcrypt')
 
 
@@ -50,15 +49,15 @@ router.post('/register', async (req, res, next) => {
                     lastname: lastname,
                     username: username,
                     email: email,
-                    password: hash
+                    password: hash,
+                    creationDate: Date.now()
                 })
                 res.json({message: "User registered"})
 
             }).catch((error) => {
                 console.log("salt error:" + error)
             })
-    })
-
+        })
 
     } catch (error) {
         console.log(error);
@@ -74,7 +73,6 @@ router.post('/login', async (req,res, next) => {
     try {
         const { email, password } = req.body
         const user = await userSchema.findOne({email})
-        const dbPassword = user.password
         
         
         if(!(email && password)) {
@@ -87,7 +85,7 @@ router.post('/login', async (req,res, next) => {
             return
         }
 
-
+        const dbPassword = user.password
         await bcrypt.compare(password, dbPassword)
         .then((userMatched) => {
             if(userMatched) {
@@ -124,16 +122,23 @@ router.post('/login', async (req,res, next) => {
 })
 
 
-router.patch("/advertisment/:id", async (request, response) =>{
-    console.log(request.body)
-    try{
-        await userSchema.updateOne({_id: request.params.id},{$push:{advertisment: request.body}});
-        response.json('Advertisment added')
-        console.log(request.params.id)
+router.patch('/advertisment/:id', async (request, response) =>{
+    const {category, title, description, price} = request.body;
+    
+    if (!(category && title && description && price)){
+        response.status(400).send({ message: "All inputs are required" });
+        return
+        }
+    else{
+        try{
+            await userSchema.updateOne({_id: request.params.id},{$push:{advertisment: request.body}});
+            response.json('Advertisment added');
+            console.log(request.params.id)
+        }
+        catch (error){
+            console.log(error)
+        };
     }
-    catch (error){
-        console.log(error)
-    };
 })
 
 
