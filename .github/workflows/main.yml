@@ -37,6 +37,7 @@ jobs:
         run: npm test
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
+          JWT_SECRET: "hemligt"
           CI: true
 
 
