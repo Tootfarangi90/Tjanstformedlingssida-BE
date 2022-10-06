@@ -123,14 +123,11 @@ router.post('/login', async (req,res, next) => {
 
 router.post('/advertisement', async (request, response) =>{
     const {category, title, description, price} = request.body;
-    
+    try {
     if (!(category && title && description && price)){
         response.status(400).send({ message: "Alla fält är obligatoriska!" });
         return
-
-    } else {
-
-        try{
+    }
             postSchema.create({
                 category: category,
                 title: title,
@@ -139,11 +136,10 @@ router.post('/advertisement', async (request, response) =>{
                 creationDate: Date.now()
             })
             response.json({message: "Annons skapad!"})
-        }
-        catch (error){
+
+    } catch (error){
             console.log(error)
-        };
-    }
+    };
 })
 
 
